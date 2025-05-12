@@ -18,6 +18,8 @@ namespace BatExpert
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HTCAPTION = 0x2;
 
+        private string? currentFilePath = null;
+
         public Form1()
         {
             InitializeComponent();
@@ -60,6 +62,7 @@ namespace BatExpert
                 var code = await webView21.ExecuteScriptAsync("editor.getValue();");
                 string text = JsonSerializer.Deserialize<string>(code);
                 File.WriteAllText(sfd.FileName, text);
+                currentFilePath = sfd.FileName;
             }
         }
 
@@ -71,6 +74,7 @@ namespace BatExpert
                 string text = File.ReadAllText(ofd.FileName);
                 string escaped = text.Replace("\\", "\\\\").Replace("\"", "\\\"").Replace("\r", "").Replace("\n", "\\n");
                 await webView21.ExecuteScriptAsync($"editor.setValue(\"{escaped}\");");
+                currentFilePath = ofd.FileName;
             }
         }
 
@@ -83,6 +87,21 @@ namespace BatExpert
         {
             var code = await webView21.ExecuteScriptAsync("editor.getValue();");
             string text = JsonSerializer.Deserialize<string>(code);
+
+            if (currentFilePath != null)
+            {
+                File.WriteAllText(currentFilePath, text);
+            }
+            else
+            {
+                var sfd = new SaveFileDialog { Filter = "Batch files (*.bat)|*.bat|All files (*.*)|*.*" };
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    File.WriteAllText(sfd.FileName, text);
+                    currentFilePath = sfd.FileName;
+                }
+            }
+
             string tempPath = Path.Combine(Path.GetTempPath(), "run_temp.bat");
             File.WriteAllText(tempPath, text);
             System.Diagnostics.Process.Start("cmd.exe", $"/c \"{tempPath}\"");
@@ -94,9 +113,8 @@ namespace BatExpert
             {
                 await webView21.ExecuteScriptAsync("editor.getModel().undo();");
             }
-            catch (Exception ex)
+            catch
             {
-
             }
         }
 
@@ -106,9 +124,8 @@ namespace BatExpert
             {
                 await webView21.ExecuteScriptAsync("editor.getModel().redo();");
             }
-            catch (Exception ex)
+            catch
             {
-
             }
         }
 

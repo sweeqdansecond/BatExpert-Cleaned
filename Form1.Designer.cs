@@ -95,7 +95,7 @@
             // 
             Run.FlatAppearance.BorderSize = 0;
             Run.FlatStyle = FlatStyle.Flat;
-            Run.Image = Properties.Resources.play__2_;
+            Run.Image = Properties.Resources.play__4_;
             Run.Location = new Point(74, 42);
             Run.Name = "Run";
             Run.Size = new Size(28, 28);
