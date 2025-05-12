@@ -116,5 +116,10 @@ namespace BatExpert
         {
             this.WindowState = FormWindowState.Minimized;
         }
+
+        private void HideRun_Click(object sender, EventArgs e)
+        {
+            Run.Visible = !Run.Visible;
+        }
     }
 }

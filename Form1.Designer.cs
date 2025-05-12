@@ -34,11 +34,12 @@
             Open = new Button();
             Run = new Button();
             panel1 = new Panel();
+            Minimize = new Button();
             Close = new Button();
             label1 = new Label();
             Undo = new Button();
             Redo = new Button();
-            Minimize = new Button();
+            HideRun = new Button();
             ((System.ComponentModel.ISupportInitialize)webView21).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -114,6 +115,18 @@
             panel1.MouseDown += panel1_MouseDown;
             panel1.MouseMove += panel1_MouseDown;
             // 
+            // Minimize
+            // 
+            Minimize.FlatAppearance.BorderSize = 0;
+            Minimize.FlatStyle = FlatStyle.Flat;
+            Minimize.Image = Properties.Resources.minus;
+            Minimize.Location = new Point(737, 4);
+            Minimize.Name = "Minimize";
+            Minimize.Size = new Size(28, 28);
+            Minimize.TabIndex = 7;
+            Minimize.UseVisualStyleBackColor = true;
+            Minimize.Click += Minimize_Click;
+            // 
             // Close
             // 
             Close.FlatAppearance.BorderSize = 0;
@@ -161,17 +174,17 @@
             Redo.UseVisualStyleBackColor = true;
             Redo.Click += Redo_Click;
             // 
-            // Minimize
+            // HideRun
             // 
-            Minimize.FlatAppearance.BorderSize = 0;
-            Minimize.FlatStyle = FlatStyle.Flat;
-            Minimize.Image = Properties.Resources.minus;
-            Minimize.Location = new Point(737, 4);
-            Minimize.Name = "Minimize";
-            Minimize.Size = new Size(28, 28);
-            Minimize.TabIndex = 7;
-            Minimize.UseVisualStyleBackColor = true;
-            Minimize.Click += Minimize_Click;
+            HideRun.FlatAppearance.BorderSize = 0;
+            HideRun.FlatStyle = FlatStyle.Flat;
+            HideRun.Image = Properties.Resources.eye_closed__1_;
+            HideRun.Location = new Point(735, 42);
+            HideRun.Name = "HideRun";
+            HideRun.Size = new Size(28, 28);
+            HideRun.TabIndex = 8;
+            HideRun.UseVisualStyleBackColor = true;
+            HideRun.Click += HideRun_Click;
             // 
             // Form1
             // 
@@ -179,6 +192,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(25, 25, 25);
             ClientSize = new Size(800, 475);
+            Controls.Add(HideRun);
             Controls.Add(Redo);
             Controls.Add(Undo);
             Controls.Add(panel1);
@@ -209,6 +223,7 @@
         private Button Undo;
         private Button Redo;
         private Button Minimize;
+        private Button HideRun;
     }
 
 
